@@ -10,9 +10,9 @@ provider "aws" {
 
 module "vpc" {
   source  = "cloudposse/vpc/aws"
-  version = "v1.1.0"
+  version = "v2.0.0"
 
-  cidr_block = "10.0.0.0/24"
+  ipv4_primary_cidr_block = "10.0.0.0/24"
 
   assign_generated_ipv6_cidr_block = true
 
