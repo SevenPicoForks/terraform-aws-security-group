@@ -53,6 +53,7 @@ resource "random_id" "rule_change_forces_new_security_group" {
 # You cannot toggle `create_before_destroy` based on input,
 # you have to have a completely separate resource to change it.
 resource "aws_security_group" "default" {
+  #checkov:skip=CKV2_AWS_5:resources not available to attach security group
   # Because we have 2 almost identical alternatives, use x == false and x == true rather than x and !x
   count = local.create_security_group && local.sg_create_before_destroy == false ? 1 : 0
 
@@ -122,6 +123,7 @@ locals {
 
 
 resource "aws_security_group" "cbd" {
+  #checkov:skip=CKV2_AWS_5:resources not available to attach security group
   # Because we have 2 almost identical alternatives, use x == false and x == true rather than x and !x
   count = local.create_security_group && local.sg_create_before_destroy == true ? 1 : 0
 

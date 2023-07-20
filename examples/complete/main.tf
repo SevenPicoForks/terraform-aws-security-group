@@ -10,9 +10,9 @@ provider "aws" {
 
 module "vpc" {
   source  = "cloudposse/vpc/aws"
-  version = "v1.1.0"
+  version = "v2.0.0"
 
-  cidr_block = "10.0.0.0/24"
+  ipv4_primary_cidr_block = "10.0.0.0/24"
 
   assign_generated_ipv6_cidr_block = true
 
@@ -124,7 +124,9 @@ module "new_security_group" {
 # Create rules for pre-created security group
 
 resource "aws_security_group" "target" {
+  #checkov:skip=CKV2_AWS_5:resources not available to attach security group
   name_prefix = format("%s-%s-", module.this.id, "existing")
+  description = "Controls access to ${module.this.id}"
   vpc_id      = module.vpc.vpc_id
   tags        = module.this.tags
 }
